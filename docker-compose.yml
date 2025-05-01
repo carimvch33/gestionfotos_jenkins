@@ -1,0 +1,32 @@
+version: "3"
+services:
+  backend:
+    build: .
+    container_name: gestionfotos-backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+
+  cliente:
+    build: ./cliente_photo
+    container_name: gestionfotos-cliente
+    ports:
+      - "1235:1235"
+    volumes:
+      - ./cliente_photo:/usr/src/app
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:latest
+    container_name: gestionfotos-db
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
