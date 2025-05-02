@@ -7,6 +7,8 @@ RUN npm install
 
 COPY . .
 
+RUN ls -la /usr/src/app
+
 EXPOSE 1235
 
 CMD ["node", "app.js"]
